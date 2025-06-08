@@ -1,53 +1,30 @@
-DevOps Lifecycle Implementation – Abode Software
-This project implements a complete DevOps lifecycle for the Abode Software product available at GitHub - hshar/website.
+# DevOps Lifecycle Implementation – Abode Software
 
-Lifecycle Overview
-Configuration Management
+This project implements the DevOps lifecycle for Abode Software using the GitHub repository: [https://github.com/hshar/website.git](https://github.com/hshar/website.git)
 
-Use tools like Ansible, Puppet, or Chef to install and configure required software on all machines.
+## Project Summary
 
-Git Workflow
+1. **Configuration Management**
+   - Installed required software using a configuration management tool (e.g., Ansible).
 
-Implement a standard Gitflow branching strategy.
+2. **Git Workflow**
+   - Implemented Git branching strategy:
+     - `master` – production deployment
+     - `develop` – testing only
 
-Monitor master and develop branches for triggering CI/CD pipelines.
+3. **CI/CD Automation**
+   - CodeBuild triggered automatically on push:
+     - **master**: test and deploy to production
+     - **develop**: test only (no deployment)
 
-CI/CD with Jenkins and CodeBuild
+4. **Containerization**
+   - Application containerized using Docker.
+   - Used pre-built image: `hshar/webapp`
+   - App code resides in `/var/www/html`
+   - Docker image rebuilt on each GitHub push.
 
-Jenkins is used to automate the pipeline:
+5. **Jenkins Pipeline Structure**
+   - **Job1: build** – Clone repo and build Docker image
+   - **Job2: test** – Run tests
+   - **Job3: prod** – Deploy to production (only on master branch)
 
-Master branch:
-
-Run tests
-
-Deploy to production
-
-Develop branch:
-
-Run tests only
-
-Containerization
-
-Application is containerized using Docker.
-
-Base image: hshar/webapp
-
-App code copied to /var/www/html
-
-Docker image is rebuilt on every commit to GitHub.
-
-Jenkins Pipeline Jobs
-
-Job 1: build
-
-Clone repo
-
-Build Docker image
-
-Job 2: test
-
-Run application tests
-
-Job 3: prod
-
-Deploy to production (only for master branch)
